@@ -39,13 +39,12 @@ This examples illustrates how a Grakn Knowledge Graph can be used to simplify a 
   - Type in `pip3 install biopython`, press enter and wait for the installation to complete.
   - Type in `python3 migrate.py`, press enter and wait for the migration to complete.
   - Type in `python3 blast.py`, press enter and wait for the BLAST search to complete. This can take a few minutes.
-  - Attend to the (possible) duplicates to ensure the data imported into the knowledge graph is clean
 
 ## Adcanced Usage
 
 Some of the following instructions assume that you have a basic knowledge of writing Python code.
 
-### Selecting different sets of target seqeunces
+### Query a different target sequence
 
 The query to extract target sequences is placed as the value of `q_match_target_sequences` variable in the `query_target_sequences()` method of the `blast.py` file.
 
@@ -64,9 +63,9 @@ For migrating data in a different format, checkout the [migration examples](http
 
 Once you are done modifying the code in `migrate.py`, `cd` into the `blast` directory and run `python3 migrate.py`
 
-### Run BLAST requests against your own EC2 BLAST Cloud instance
+### Run BLAST requests against your a BLAST Cloud instance
 
-The code in `blast.py` uses the `qblast()` method of the [Biopython](https://github.com/biopython/biopython) library, which currenlty does not support running BLAST requests against a BLAST Cloud instance.
+The code in `blast.py` uses the `qblast()` method of the [Biopython](https://github.com/biopython/biopython) library, which currenlty lacks authentication support for running BLAST requests against a BLAST Cloud instance.
 However, the forked version [here](https://github.com/sorsaffari/biopython) provides such support. To use this version instead, take the following steps:
 
 - run `git clone git@github.com:sorsaffari/biopython.git`
@@ -75,7 +74,7 @@ However, the forked version [here](https://github.com/sorsaffari/biopython) prov
 - [Install biopython from source](https://github.com/sorsaffari/biopython#installation-from-source)
 - modify the `blast.py` file to:
   - change the url passed to the `qblast()` method to that of your private cloud instance
-  - add `username="blast"` and `password="your instance id"` to the parameters passed to `qblast()`
+  - add `username="blast"` and `password="the instance id"` to the parameters passed to `qblast()`
 - run `python3 blast.py`
 
 ### Run BLAST against NCBI BLAST+
